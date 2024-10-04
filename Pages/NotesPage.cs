@@ -1,6 +1,6 @@
 ﻿using Microsoft.Playwright;
 
-namespace EvernoteAutomation.Pages
+namespace IconProjectEvernote.Pages
 {
     public class NotesPage
     {

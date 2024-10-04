@@ -3,7 +3,7 @@
   Scenario: Unsuccessful login using email
     Given I am on the login page
     When I login with invalid email "invalid@example.com" and password "wrongPassword"
-    Then I should see the error message "Invalid email or password"
+    Then I should see the error message "Check your credentials. We couldn’t match your email, username, or password."
 
   Scenario: Successful login using email
     Given I am on the login page

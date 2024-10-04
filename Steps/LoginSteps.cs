@@ -1,4 +1,4 @@
-﻿using EvernoteAutomation.Pages;
+﻿using IconProjectEvernote.Pages;
 using Microsoft.Playwright;
 using TechTalk.SpecFlow;
 
@@ -45,8 +45,7 @@ public class LoginSteps
     [When(@"I login with invalid email ""(.*)"" and password ""(.*)""")]
     public async Task WhenILoginWithInvalidEmailAndPassword(string email, string password)
     {
-        await _loginPage.EnterEmail(email)
-;
+        await _loginPage.EnterEmail(email);
         await _loginPage.ClickContinueButton();
         await _loginPage.EnterPassword(password);
         await _loginPage.ClickContinueButton();
@@ -55,16 +54,14 @@ public class LoginSteps
     [Then(@"I should see the error message ""(.*)""")]
     public async Task ThenIShouldSeeTheErrorMessage(string expectedErrorMessage)
     {
-        var errorMessageLocator = _page.Locator(_loginPage.ErrorMessageLocator);
-        await Assertions.Expect(errorMessageLocator).ToHaveTextAsync(expectedErrorMessage);
+        await Assertions.Expect(_loginPage.ErrorMessage).ToHaveTextAsync(expectedErrorMessage);
     }
 
     [When(@"I login with valid email ""(.*)"" and password ""(.*)""")]
     [When(@"I login again with valid email ""(.*)"" and password ""(.*)""")]
     public async Task WhenILoginWithValidEmailAndPassword(string email, string password)
     {
-        await _loginPage.EnterEmail(email)
-;
+        await _loginPage.EnterEmail(email);
         await _loginPage.ClickContinueButton();
         await _loginPage.EnterPassword(password);
         await _loginPage.ClickContinueButton();
@@ -79,8 +76,7 @@ public class LoginSteps
     [Given(@"I am logged in with valid email ""(.*)"" and password ""(.*)""")]
     public async Task GivenIAmLoggedInWithValidEmailAndPassword(string email, string password)
     {
-        await _loginPage.EnterEmail(email)
-;
+        await _loginPage.EnterEmail(email);
         await _loginPage.ClickContinueButton();
         await _loginPage.EnterPassword(password);
         await _loginPage.ClickContinueButton();
