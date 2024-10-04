@@ -45,7 +45,7 @@ namespace IconProjectEvernote.Pages
 
         public async Task<string> GetErrorMessage()
         {
-            return await ErrorMessage.InnerTextAsync();  // Using the Locator for error message
+            return await ErrorMessage.InnerTextAsync();
         }
 
         public async Task<bool> IsLoggedIn()
