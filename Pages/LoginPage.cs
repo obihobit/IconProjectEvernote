@@ -6,12 +6,11 @@ namespace IconProjectEvernote.Pages
     {
         private readonly IPage _page;
 
-        private string EmailInput { get; } = "[placeholder='Email address or Username']";
-        private string PasswordInput { get; } = "[placeholder='Password']";
-        private string LoginButton { get; } = "[data-test-id='login-button']";
-        private string LoggedInUniqueElement { get; } = "[data-test-id='logged-in-unique-element']"; 
+        public ILocator EmailInput => _page.GetByPlaceholder("Email address or Username");
+        public ILocator PasswordInput => _page.GetByPlaceholder("Password");
+        public ILocator ContinueButton => _page.GetByRole(AriaRole.Button, new() { Name = "Continue", Exact = true });
         public ILocator ErrorMessage => _page.Locator("span.text-secondary-red-400");
-        public ILocator LoggedInLocator => _page.Locator(LoggedInUniqueElement);
+        public ILocator LoggedInLocator => _page.Locator("[data-test-id='logged-in-unique-element']");
 
         public LoginPage(IPage page)
         {
@@ -25,22 +24,17 @@ namespace IconProjectEvernote.Pages
 
         public async Task EnterEmail(string email)
         {
-            await _page.GetByPlaceholder("Email address or Username").PressSequentiallyAsync(email, new() { Delay = 100 });
+            await EmailInput.PressSequentiallyAsync(email, new() { Delay = 100 });
         }
 
         public async Task ClickContinueButton()
         {
-            await _page.GetByRole(AriaRole.Button, new() { Name = "Continue", Exact = true }).ClickAsync();
+            await ContinueButton.ClickAsync();
         }
 
         public async Task EnterPassword(string password)
         {
-            await _page.GetByPlaceholder("Password").PressSequentiallyAsync(password, new() { Delay = 100 });
-        }
-
-        public async Task ClickLoginButton()
-        {
-            await _page.ClickAsync(LoginButton);
+            await PasswordInput.PressSequentiallyAsync(password, new() { Delay = 100 });
         }
 
         public async Task<string> GetErrorMessage()
